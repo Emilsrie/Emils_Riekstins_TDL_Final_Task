@@ -13,4 +13,11 @@ public class Button extends BasePageObject {
         button.click();
         System.out.println("Button " + getName() + " was clicked!");
     }
+
+    public void scrollElementIntoView() {
+        WebElement button = getWebElement(getLocator());
+        if (!button.isDisplayed()) {
+            getJavascriptExecutor().executeScript("arguments[0].scrollIntoView(alignToTop);", button);
+        }
+    }
 }

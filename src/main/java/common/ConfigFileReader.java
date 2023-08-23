@@ -27,7 +27,7 @@ public class ConfigFileReader {
         }
         catch (FileNotFoundException fnfe) {
             fnfe.printStackTrace();
-            throw new RuntimeException("Configuration.properties not found at "+propertiesFilePath);
+            throw new RuntimeException("Configuration.properties not found at " + propertiesFilePath);
         }
     }
 
@@ -46,6 +46,15 @@ public class ConfigFileReader {
             return url;
         } else {
             throw new RuntimeException("url is not specified in the config.properties file");
+        }
+    }
+
+    public String getFullName() {
+        String fullname = properties.getProperty("author.fullname");
+        if (fullname != null) {
+            return fullname;
+        } else {
+            throw new RuntimeException("author.fullname is not specified in the config.properties file");
         }
     }
 

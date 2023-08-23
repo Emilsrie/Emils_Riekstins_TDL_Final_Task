@@ -1,8 +1,6 @@
 package common;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.File;
@@ -13,9 +11,10 @@ public class TestBase {
     private ConfigFileReader configFileReader = new ConfigFileReader();
 
     private final String url = configFileReader.getUrl();
-    //"https://petstore.octoperf.com/actions/Catalog.action";
 
     private static WebDriver driver;
+
+    JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
 
     public void openUrl() {
         getDriver().get(url);
@@ -37,6 +36,10 @@ public class TestBase {
     public void closeDriver() {
         driver.close();
         driver.quit();
+    }
+
+    public JavascriptExecutor getJavascriptExecutor() {
+        return this.javascriptExecutor;
     }
 
     public WebElement getWebElement(String locator) {
