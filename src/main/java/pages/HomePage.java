@@ -1,8 +1,6 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.objects.Button;
 import pages.objects.Link;
@@ -11,9 +9,9 @@ public class HomePage {
 
     public Link mainLogo = new Link("Main logo", "css=a > img");
 
-    public Button dialogBox = new Button("Dialog box", "xpath=//div[2]/div[1]/ul/li[6]/a");
+    public Button dialogBoxButton = new Button("Dialog box button", "xpath=//a[text()='DialogBox']");
 
-    //public Button closePopupAd = new Button("Close popup ad", "css=ins>span>svg>path");
+    public Button TabsButton = new Button("Tabs button", "xpath=//a[text()='Tabs']");
 
     public boolean isInitialized() {
         return this.mainLogo.isVisible();
@@ -24,11 +22,12 @@ public class HomePage {
     }
 
     public void clickDialogBox() {
-        this.dialogBox.scrollElementIntoView();
-        this.dialogBox.click();
+        this.dialogBoxButton.click();
     }
-//    public void clickClosePopupAd() {
-//        this.closePopupAd.click();
-//    }
 
+    public void clickTabsButton() {
+        this.TabsButton.click();
+    }
+
+    //TODO if popup ad opens, then close it
 }

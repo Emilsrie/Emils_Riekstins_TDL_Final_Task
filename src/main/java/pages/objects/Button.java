@@ -1,5 +1,6 @@
 package pages.objects;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 public class Button extends BasePageObject {
@@ -10,8 +11,9 @@ public class Button extends BasePageObject {
 
     public void click() {
         WebElement button = getWebElement(getLocator());
+        button.sendKeys(Keys.DOWN);
         button.click();
-        System.out.println("Button " + getName() + " was clicked!");
+        System.out.println("Button '" + getName() + "' was clicked!");
     }
 
     public void scrollElementIntoView() {
@@ -20,4 +22,5 @@ public class Button extends BasePageObject {
             getJavascriptExecutor().executeScript("arguments[0].scrollIntoView(alignToTop);", button);
         }
     }
+
 }

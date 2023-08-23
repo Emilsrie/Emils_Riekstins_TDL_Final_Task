@@ -2,6 +2,8 @@ package common;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -23,14 +25,25 @@ public class TestBase {
     public ConfigFileReader getConfig() {
         return this.configFileReader;
     }
+
     public WebDriver getDriver() {
         if (this.driver == null) {
-            System.setProperty("webdriver.chrome.driver", "src" + File.separator + "main" + File.separator + "resources" + File.separator + "drivers" + File.separator + "chromedriver");
+            System.setProperty("webdriver.chrome.driver", "src" + File.separator + "main" + File.separator + "resources" + File.separator + "drivers" + File.separator + "chromedriver.exe");
             driver = new ChromeDriver();
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
         return this.driver;
+    }
+
+    public WebDriver switchToIframe(String path) {
+        WebElement iframe = getWebElement(path);
+        driver.switchTo().frame(iframe);
+        return this.driver;
+    }
+
+    public WebDriver switchToDefault() {
+        return driver.switchTo().defaultContent();
     }
 
     public void closeDriver() {
@@ -60,6 +73,15 @@ public class TestBase {
             return getDriver().findElement(By.className(classLocator));
         } else {
             return null;
+        }
+    }
+
+    public void waitToLoad() {
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.err.println("Thread Interrupted");
         }
     }
 }
