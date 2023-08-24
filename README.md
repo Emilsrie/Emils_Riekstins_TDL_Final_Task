@@ -8,7 +8,7 @@ Test class is located in src/test/java/FinalTask1 <br>
 
 !!uBlock-Origin should be located in C:/extensions/!! <br>
 
-#Maven commands + explanation:
+# Maven commands + explanation:
 * Running one specific test class <br>
 mvn test -Dtest=com.example.MyTest <br>
 Runs all the tests within MyTest class (com.example is the path to the calss)
@@ -22,7 +22,52 @@ mvn test -Pregression-tests <br>
 Assuming that all tests are located in src/test/java/ folder it will run all tests that have been specified as regression in testng.xml file
 
 * How to exclude tests from running
-** S
+1) Using Surefire Plugin Excludes. It is used in Maven for running tests and can be configured to exclude certain test classes or methods using '-Dtest' <br>
+For example: mvn test -Dtest=!com.example.ExcludedTest <br>
+
+2) Using Surefire Plugin Excludes in pob. As the previous example Surefire can be used to do exclusions directly in the project's 'pom.xml' file by specifying the excluded classes within the configuration <br>
+For example:
+'''
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+                <excludes>
+                    <exclude>**/ExcludedTest.java</exclude>
+                    <exclude>**/MyTest.java#excludedMethod</exclude>
+                </excludes>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+'''
+
+3) Using TestNG groups. If testNG is used as the testing framework, groups can be used to categorise tests and excluded specific groups (for example 'regression') during test execution <br>
+Example: <br>
+First specify the group before the class: <br>
+'''
+@Test(groups = "regression")
+public void testMethod() {
+    // Test logic here
+}
+'''
+And then exclude them in the testng.xml configuration file: <br>
+'''
+<suite name="MyTestSuite">
+    <test name="RegressionTests">
+        <groups>
+            <run>
+                <exclude name="regression"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.example.MyTest"/>
+        </classes>
+    </test>
+</suite>
+'''
 
 # Tests
 ### Test 1
