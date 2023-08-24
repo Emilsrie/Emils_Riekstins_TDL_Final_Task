@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -34,9 +35,19 @@ public class TestBase {
     }
 
     public WebDriver getDriver() {
-        if (this.driver == null) {
+//        if (this.driver == null) {
+//            System.setProperty("webdriver.chrome.driver", "src" + File.separator + "main" + File.separator + "resources" + File.separator + "drivers" + File.separator + "chromedriver.exe");
+//            driver = new ChromeDriver();
+//            driver.manage().window().maximize();
+//            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//        }
+//        return this.driver;
+
+        if(this.driver == null) {
             System.setProperty("webdriver.chrome.driver", "src" + File.separator + "main" + File.separator + "resources" + File.separator + "drivers" + File.separator + "chromedriver.exe");
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("src" + File.separator + "main" + File.separator + "resources" + File.separator + "extensions" + File.separator + "uBlock-Origin");
+            driver = new ChromeDriver(options);
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
@@ -92,14 +103,10 @@ public class TestBase {
         }
     }
 
-    public void hideFooterAd() {
-        JavascriptExecutor jsExecutor = (JavascriptExecutor)getDriver();
-        WebElement advertisementBlock = getWebElement("css=ins[data-adsbygoogle-status='done'][data-anchor-status='displayed']");
-        jsExecutor.executeScript("arguments[0].style.bottom = '-350px';", advertisementBlock);
-    }
+//    public void hideFooterAd() {
+//        JavascriptExecutor jsExecutor = (JavascriptExecutor)getDriver();
+//        WebElement advertisementBlock = getWebElement("css=ins[data-adsbygoogle-status='done'][data-anchor-status='displayed']");
+//        jsExecutor.executeScript("arguments[0].style.bottom = '-350px';", advertisementBlock);
+//    }
 
-    public void createScreenshot(ExtentTest test) {
-        String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BASE64);
-        test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
-    }
 }
