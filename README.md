@@ -27,7 +27,7 @@ For example: mvn test -Dtest=!com.example.ExcludedTest <br>
 
 2) Using Surefire Plugin Excludes in pob. As the previous example Surefire can be used to do exclusions directly in the project's 'pom.xml' file by specifying the excluded classes within the configuration <br>
 For example:
-'''
+```
 <build>
     <plugins>
         <plugin>
@@ -42,19 +42,19 @@ For example:
         </plugin>
     </plugins>
 </build>
-'''
+```
 
 3) Using TestNG groups. If testNG is used as the testing framework, groups can be used to categorise tests and excluded specific groups (for example 'regression') during test execution <br>
 Example: <br>
 First specify the group before the class: <br>
-'''
+```
 @Test(groups = "regression")
 public void testMethod() {
     // Test logic here
 }
-'''
+```
 And then exclude them in the testng.xml configuration file: <br>
-'''
+```
 <suite name="MyTestSuite">
     <test name="RegressionTests">
         <groups>
@@ -67,7 +67,7 @@ And then exclude them in the testng.xml configuration file: <br>
         </classes>
     </test>
 </suite>
-'''
+```
 
 # Tests
 ### Test 1
