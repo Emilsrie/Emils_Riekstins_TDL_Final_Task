@@ -14,26 +14,19 @@ import java.util.concurrent.TimeUnit;
 public class TestBase {
 
     private ConfigFileReader configFileReader = new ConfigFileReader();
-
     private final String url = configFileReader.getUrl();
     private final String url2 = configFileReader.getUrl2();
-
     private static WebDriver driver;
-
     JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
-
     public void openUrl() {
         getDriver().get(url);
     }
-
     public void openUrl2() {
         getDriver().get(url2);
     }
-
     public ConfigFileReader getConfig() {
         return this.configFileReader;
     }
-
     public WebDriver getDriver() {
 //        if (this.driver == null) {
 //            System.setProperty("webdriver.chrome.driver", "src" + File.separator + "main" + File.separator + "resources" + File.separator + "drivers" + File.separator + "chromedriver.exe");
@@ -54,13 +47,11 @@ public class TestBase {
         }
         return this.driver;
     }
-
     public WebDriver switchToIframe(String path) {
         WebElement iframe = getWebElement(path);
         driver.switchTo().frame(iframe);
         return this.driver;
     }
-
     public WebDriver switchToDefault() {
         return driver.switchTo().defaultContent();
     }
