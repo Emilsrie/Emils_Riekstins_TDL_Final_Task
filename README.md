@@ -49,7 +49,7 @@ Example: <br>
 First specify the group before the class: <br>
 ```
 @Test(groups = "regression")
-public void testMethod() {
+public void MyTest() {
     // Test logic here
 }
 ```
