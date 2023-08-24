@@ -6,7 +6,7 @@ Tests are created using page object model (PMO) with two types: smoke and regres
 
 Test class is located in src/test/java/FinalTask1 <br>
 
-!!uBlock-Origin should be located in C:/extensions/!! <br>
+**!! uBlock-Origin should be located in C:/extensions/ !!** <br>
 
 # Maven commands + explanation:
 * Running one specific test class <br>
