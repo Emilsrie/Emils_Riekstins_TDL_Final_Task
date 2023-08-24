@@ -10,15 +10,15 @@ Test class is located in src/test/java/FinalTask1 <br>
 
 # Maven commands + explanation:
 * Running one specific test class <br>
-mvn test -Dtest=com.example.MyTest <br>
+_ _mvn test -Dtest=com.example.MyTest_ _ <br>
 Runs all the tests within MyTest class (com.example is the path to the calss)
 
 * Running one specific test in class <br>
-mvn test -Dtest=com.example.MyTest#testSomething <br>
+_ _mvn test -Dtest=com.example.MyTest#testSomething_ _ <br>
 Runs testSomething test in MyTest class 
 
 * Running un all Regression tests <br>
-mvn test -Pregression-tests <br>
+_ _mvn test -Pregression-tests_ _ <br>
 Assuming that all tests are located in src/test/java/ folder it will run all tests that have been specified as regression in testng.xml file
 
 * How to exclude tests from running
