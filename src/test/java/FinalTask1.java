@@ -6,15 +6,12 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import common.ConfigFileReader;
 import common.TestBase;
 import org.openqa.selenium.*;
-import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.*;
-import pages.frames.FormFrame;
-import pages.frames.SimpleAccordeonFrame;
+import pages.frames.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 public class FinalTask1 extends TestBase {
 
@@ -50,19 +47,21 @@ public class FinalTask1 extends TestBase {
         report.attachReporter(sparkReporter);
     }
 
-    @Test(groups = "smoke", description = "Smoke test")
+    // TODO [maybe] create BasePage class (or interface) to be extended (or implement) by all other pages for test.log method creation in TestBase to clean up code
+    // TODO if popup ad opens, then close it
+    @Test//(groups = "smoke", description = "Smoke test")
     public void firstTest() {
         // Start ExtentTest
-        ExtentTest test = report.createTest("Testing new account creation");
+        ExtentTest test = report.createTest("Test1: testing new account creation");
         test.log(Status.INFO, "The test is started");
 
         openUrl();
         // Initializing homepage
         HomePage homePage = new HomePage(driver);
         if (homePage.isInitialized()) {
-            test.log(Status.INFO, "Home page is visible");
+            test.log(Status.PASS, "Home page is visible");
         } else {
-            test.log(Status.INFO, "Home page is NOT visible");
+            test.log(Status.FAIL, "Home page is NOT visible");
         }
 
         // Navigating to dialog boxes page
@@ -71,9 +70,9 @@ public class FinalTask1 extends TestBase {
         // Initializing dialog boxes page
         DialogBoxesPage dialogBoxesPage = new DialogBoxesPage(driver);
         if (dialogBoxesPage.isInitialized()) {
-            test.log(Status.INFO, "Dialog boxes page is visible");
+            test.log(Status.PASS, "Dialog boxes page is visible");
         } else {
-            test.log(Status.INFO, "Dialog boxes is NOT visible");
+            test.log(Status.FAIL, "Dialog boxes is NOT visible");
         }
 
         // Clicking on "Create New User"
@@ -84,7 +83,7 @@ public class FinalTask1 extends TestBase {
         if (formFrame.isInitialized()) {
             test.log(Status.INFO, "Form frame is visible");
         } else {
-            test.log(Status.INFO, "Form frame is NOT visible");
+            test.log(Status.FAIL, "Form frame is NOT visible");
         }
 
         // Waiting for form to open for screenshot
@@ -103,27 +102,32 @@ public class FinalTask1 extends TestBase {
         formFrame.clickCreateAnAccountButton();
         // Checking if new user has been created
         if (formFrame.newUserIsCreated()) {
-            test.log(Status.INFO, "New user is created");
+            test.log(Status.PASS, "New user is created");
         } else {
-            test.log(Status.INFO, "New user is NOT created");
+            test.log(Status.FAIL, "New user is NOT created");
         }
     }
 
     // TODO close popup ads
-    @Test(groups = "smoke", description = "Smoke test")
+    @Test//(groups = "smoke", description = "Smoke test")
     public void secondTest() {
         // Start ExtentTest
-        ExtentTest test = report.createTest("Testing section 2 display");
+        ExtentTest test = report.createTest("Test2: testing section 2 display");
         test.log(Status.INFO, "The test is started");
 
         openUrl();
         // Initializing homepage
         HomePage homePage = new HomePage(driver);
         if (homePage.isInitialized()) {
-            test.log(Status.INFO, "Home page is visible");
+            test.log(Status.PASS, "Home page is visible");
         } else {
-            test.log(Status.INFO, "Home page is NOT visible");
+            test.log(Status.FAIL, "Home page is NOT visible");
         }
+
+        // Hiding footer ad
+        JavascriptExecutor jsExecutor = (JavascriptExecutor)getDriver();
+        WebElement advertisementBlock = getWebElement("css=ins[data-adsbygoogle-status='done'][data-anchor-status='displayed']");
+        jsExecutor.executeScript("arguments[0].style.bottom = '-350px';", advertisementBlock);
 
         // Clicking on tabs button
         homePage.clickTabsButton();
@@ -131,10 +135,14 @@ public class FinalTask1 extends TestBase {
         // Initializing tabs page
         TabsPage tabsPage = new TabsPage(driver);
         if (tabsPage.isInitialized()) {
-            test.log(Status.INFO, "Tabs page is visible");
+            test.log(Status.PASS, "Tabs page is visible");
         } else {
-            test.log(Status.INFO, "Tabs page is NOT visible");
+            test.log(Status.FAIL, "Tabs page is NOT visible");
         }
+
+        // Hiding popup ads
+//        WebElement popupAds = getWebElement("css=ins[data-adsbygoogle-status='done'][data-anchor-status='displayed']");
+//        jsExecutor.executeScript("arguments[0].style.display = 'none';", popupAds);
 
         // Clicking on "section 2"
         // TODO add test.log
@@ -143,27 +151,135 @@ public class FinalTask1 extends TestBase {
         SimpleAccordeonFrame simpleAccordeonFrame = new SimpleAccordeonFrame(driver);
         simpleAccordeonFrame.clickSection2Button();
 
-        // Output selection 2 text
-        // TODO correcty output text (p:nth-child(1))
-        String selection2Text = simpleAccordeonFrame.getSelection2Text();
-        if (!selection2Text.isEmpty()) {
-            System.out.println("Selection 2 text: " + simpleAccordeonFrame.getSelection2Text());
-            test.log(Status.INFO, "Selection 2 text output in console");
-        } else {
-            test.log(Status.INFO, "Selection 2 text NOT output in console");
-        }
-
         // Wait for dropdown to finish opening for the screenshot
         waitToLoad();
         // Creating a screenshot
         String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BASE64);
         test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
+
+        this.driver = switchToDefault();
     }
 
-    @AfterMethod
-    public void endTask() {
-       closeDriver();
+    @Test//(groups = "smoke", description = "Smoke test")
+    public void thirdTest() {
+        // Start ExtentTest
+        ExtentTest test = report.createTest("Test3: testing random color and value");
+        test.log(Status.INFO, "The test is started");
+
+        openUrl();
+        // Initializing homepage
+        HomePage homePage = new HomePage(driver);
+        if (homePage.isInitialized()) {
+            test.log(Status.PASS, "Home page is visible");
+        } else {
+            test.log(Status.FAIL, "Home page is NOT visible");
+        }
+
+        homePage.clickProgressBarButton();
+
+        ProgressBarPage progressBarPage = new ProgressBarPage(driver);
+        progressBarPage.clickRandomProgressBarButton();
+
+        this.driver = switchToIframe("xpath=//div[2]/p/iframe");
+        RandomProgressBarFrame randomProgressBarFrame = new RandomProgressBarFrame(driver);
+        randomProgressBarFrame.clickRandomColorButton();
+
+        this.driver = switchToDefault();
     }
+
+    @Test//(groups = "regression", description = "Regression test")
+    public void fourthTest() {
+        // Start ExtentTest
+        ExtentTest test = report.createTest("Test4: testing popup window closing");
+        test.log(Status.INFO, "The test is started");
+
+        openUrl();
+        // Initializing homepage
+        HomePage homePage = new HomePage(driver);
+        if (homePage.isInitialized()) {
+            test.log(Status.PASS, "Home page is visible");
+        } else {
+            test.log(Status.FAIL, "Home page is NOT visible");
+        }
+
+        // Navigating to dialog boxes page
+        homePage.clickDialogBox();
+
+        // Initializing dialog boxes page
+        DialogBoxesPage dialogBoxesPage = new DialogBoxesPage(driver);
+        if (dialogBoxesPage.isInitialized()) {
+            test.log(Status.PASS, "Dialog boxes page is visible");
+        } else {
+            test.log(Status.FAIL, "Dialog boxes is NOT visible");
+        }
+
+        // Clicking on messagebox tab
+        dialogBoxesPage.clickMessageBoxButton();
+
+        // Switching to message box frame
+        this.driver = switchToIframe("xpath=//div[2]/p[1]/iframe");
+        MessageBoxFrame messageBoxFrame = new MessageBoxFrame(driver);
+        messageBoxFrame.clickOkButton(); // Clicking on message box ok button
+
+        if (!messageBoxFrame.isPopupBoxVisible()) {
+            test.log(Status.PASS, "Popup page closed");
+        } else {
+            test.log(Status.FAIL, "Popup page NOT closed");
+        }
+
+        this.driver = switchToDefault();
+
+        // Switching to forms tab
+        dialogBoxesPage.clickFormButton();
+        // Switching to message box tab
+        dialogBoxesPage.clickMessageBoxButton();
+
+        this.driver = switchToIframe("xpath=//div[2]/p[1]/iframe");
+        if (!messageBoxFrame.isPopupBoxVisible()) {
+            test.log(Status.PASS, "Popup window not visible");
+        } else {
+            test.log(Status.FAIL, "Popup window IS visible");
+        }
+
+        // Creating a screenshot
+        String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BASE64);
+        test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
+
+        this.driver = switchToDefault();
+    }
+
+    @Test//(groups = "regression", description = "Regression test")
+    public void fifthTest() {
+        // Start ExtentTest
+        ExtentTest test = report.createTest("Test5: testing search field");
+        test.log(Status.INFO, "The test is started");
+
+        openUrl2();
+
+        // Initializing homepage
+        AutoCompletePage autoCompletePage = new AutoCompletePage(driver);
+        if (autoCompletePage.isInitialized()) {
+            test.log(Status.PASS, "Auto complete page is visible");
+        } else {
+            test.log(Status.FAIL, "Auto complete page is NOT visible");
+        }
+
+        this.driver = switchToIframe("xpath=//div[1]/p/iframe");
+        CategoriesFrame categoriesFrame = new CategoriesFrame(driver);
+        categoriesFrame.inputInSearchField();
+        categoriesFrame.clickAndersAnderssonButton();
+
+        // Creating a screenshot
+        String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BASE64);
+        test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
+
+        this.driver = switchToDefault();
+    }
+
+//    @AfterMethod
+//    public void endTask() {
+//       closeDriver();
+//    }
 
     @AfterClass
     public static void endTest() {

@@ -13,6 +13,7 @@ public class TestBase {
     private ConfigFileReader configFileReader = new ConfigFileReader();
 
     private final String url = configFileReader.getUrl();
+    private final String url2 = configFileReader.getUrl2();
 
     private static WebDriver driver;
 
@@ -20,6 +21,10 @@ public class TestBase {
 
     public void openUrl() {
         getDriver().get(url);
+    }
+
+    public void openUrl2() {
+        getDriver().get(url2);
     }
 
     public ConfigFileReader getConfig() {

@@ -1,7 +1,10 @@
 package pages.objects;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+
+import java.util.concurrent.TimeUnit;
 
 public class Button extends BasePageObject {
 
@@ -11,7 +14,7 @@ public class Button extends BasePageObject {
 
     public void click() {
         WebElement button = getWebElement(getLocator());
-        button.sendKeys(Keys.DOWN);
+        //button.sendKeys(Keys.DOWN);
         button.click();
         System.out.println("Button '" + getName() + "' was clicked!");
     }

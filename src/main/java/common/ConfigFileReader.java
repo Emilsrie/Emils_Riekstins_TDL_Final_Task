@@ -31,14 +31,7 @@ public class ConfigFileReader {
         }
     }
 
-    public String getEnvironment() {
-        String envPath = properties.getProperty("environment.name");
-        if (envPath != null) {
-            return envPath;
-        } else {
-            throw new RuntimeException("environment.name is not specified in the config.properties file");
-        }
-    }
+
 
     public String getUrl() {
         String url = properties.getProperty("url");
@@ -46,6 +39,15 @@ public class ConfigFileReader {
             return url;
         } else {
             throw new RuntimeException("url is not specified in the config.properties file");
+        }
+    }
+
+    public String getUrl2() {
+        String url = properties.getProperty("url2");
+        if (url != null) {
+            return url;
+        } else {
+            throw new RuntimeException("url2 is not specified in the config.properties file");
         }
     }
 
@@ -73,6 +75,33 @@ public class ConfigFileReader {
             return surname;
         } else {
             throw new RuntimeException("author.surname is not specified in the config.properties file");
+        }
+    }
+
+    public String getEmail() {
+        String envPath = properties.getProperty("author.email");
+        if (envPath != null) {
+            return envPath;
+        } else {
+            throw new RuntimeException("author.email is not specified in the config.properties file");
+        }
+    }
+
+    public String getEnvironment() {
+        String envPath = properties.getProperty("environment.name");
+        if (envPath != null) {
+            return envPath;
+        } else {
+            throw new RuntimeException("environment.name is not specified in the config.properties file");
+        }
+    }
+
+    public String getPassword() {
+        String envPath = properties.getProperty("password");
+        if (envPath != null) {
+            return envPath;
+        } else {
+            throw new RuntimeException("password is not specified in the config.properties file");
         }
     }
 }
