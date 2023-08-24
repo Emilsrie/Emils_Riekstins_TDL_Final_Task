@@ -39,7 +39,7 @@ public class FinalTask1 extends TestBase {
         ExtentSparkReporter sparkReporter = new ExtentSparkReporter(reportPath);
         sparkReporter.loadXMLConfig(configPath);
         sparkReporter.config().setReportName("Final Task Extent Report");
-        report.setSystemInfo("Project", "TDL Summer School");
+        report.setSystemInfo("Project", "TDL Summer School Final Test");
         report.setSystemInfo("Author", "Emils Riekstins");
         report.attachReporter(sparkReporter);
     }
