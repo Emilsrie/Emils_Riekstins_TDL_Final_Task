@@ -1,6 +1,6 @@
 # Emils_Riekstins_TDL_SS_Final_Task
 
-Project contains 5 test cases for testing globalsqa.com/demo-site/ and globalsqa.com/demo-site/auto-complete/ page features. <br>
+Project contains 5 test cases for testing [glovalsqa demo site](globalsqa.com/demo-site/) and [globalsqa auto complete](globalsqa.com/demo-site/auto-complete/) page features. <br>
 Tests are performed using Java and selenium with Extent Framework reporter. <br>
 Tests are created using page object model (PMO) with two types: smoke and regression. <br>
 
