@@ -1,28 +1,28 @@
 # Emils_Riekstins_TDL_SS_Final_Task
 
-Project contains 5 test cases for testing globalsqa.com/demo-site/ and globalsqa.com/demo-site/auto-complete/ page features.
-Tests are performed using Java and selenium with Extent Framework reporter.
-Tests are created using page object model (PMO) with two types: smoke and regression.
+Project contains 5 test cases for testing globalsqa.com/demo-site/ and globalsqa.com/demo-site/auto-complete/ page features. <br>
+Tests are performed using Java and selenium with Extent Framework reporter. <br>
+Tests are created using page object model (PMO) with two types: smoke and regression. <br>
 
-Test class is located in src/test/java/FinalTask1
+Test class is located in src/test/java/FinalTask1 <br>
 
-!!uBlock-Origin should be located in C:/extensions/!!
+!!uBlock-Origin should be located in C:/extensions/!! <br>
 
 #Maven commands + explanation:
-* Running one specific test class
-mvn test -Dtest=com.example.MyTest 
+* Running one specific test class <br>
+mvn test -Dtest=com.example.MyTest <br>
 Runs all the tests within MyTest class (com.example is the path to the calss)
 
-* Running one specific test in class
-mvn test -Dtest=com.example.MyTest#testSomething
-Runs testSomething test in MyTest class
+* Running one specific test in class <br>
+mvn test -Dtest=com.example.MyTest#testSomething <br>
+Runs testSomething test in MyTest class 
 
-* Running un all Regression tests
-mvn test -Pregression-tests
+* Running un all Regression tests <br>
+mvn test -Pregression-tests <br>
 Assuming that all tests are located in src/test/java/ folder it will run all tests that have been specified as regression in testng.xml file
 
 * How to exclude tests from running
-* 
+** S
 
 # Tests
 ### Test 1
