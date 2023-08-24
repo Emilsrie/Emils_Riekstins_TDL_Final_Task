@@ -46,7 +46,8 @@ public class TestBase {
         if(this.driver == null) {
             System.setProperty("webdriver.chrome.driver", "src" + File.separator + "main" + File.separator + "resources" + File.separator + "drivers" + File.separator + "chromedriver.exe");
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("src" + File.separator + "main" + File.separator + "resources" + File.separator + "extensions" + File.separator + "uBlock-Origin");
+            //options.addArguments("--load-extension=src" + File.separator + "main" + File.separator + "resources" + File.separator + "extensions" + File.separator + "uBlock-Origin");
+            options.addArguments("--load-extension=C:" + File.separator + "extensions" + File.separator + "uBlock-Origin");
             driver = new ChromeDriver(options);
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
