@@ -70,7 +70,7 @@ And then exclude them in the testng.xml configuration file: <br>
 ```
 
 # Tests
-### Test 1
+* ### Test 1
 Tests opening dialog box page and creating new user with name: Emils Riekstins, email: emils@riekstins .com and password: mypassword and checks if the new user account has been added to the list
 
 ### Test 2
