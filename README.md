@@ -4,7 +4,7 @@ Project contains 5 test cases for testing [glovalsqa demo site](globalsqa.com/de
 Tests are performed using Java and selenium with Extent Framework reporter. <br>
 Tests are created using page object model (PMO) with two types: smoke and regression. <br>
 
-Test class is located in src/test/java/FinalTask1 <br>
+Test class is located in src/test/java/FinalTask1.java <br>
 
 **!! uBlock-Origin should be located in C:/extensions/ !!** <br>
 
