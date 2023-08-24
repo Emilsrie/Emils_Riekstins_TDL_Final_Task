@@ -6,9 +6,9 @@ import pages.objects.Button;
 
 public class RandomProgressBarFrame {
 
-    public Button randomColorButton = new Button("Random color button", "xpath=//*[@id='Random Progress Bar']");
+    public Button randomColorButton = new Button("Random color button", "css=button#colorButton");
 
-    public Button randomValueDeterminateButton = new Button("Random Value Determinate Button", "xpath=//*[@id='numButton']");
+    public Button randomValueDeterminateButton = new Button("Random Value Determinate Button", "css=button#numButton");
 
     public RandomProgressBarFrame(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -19,6 +19,6 @@ public class RandomProgressBarFrame {
     }
 
     public void clickRandomValueDeterminateButton() {
-        this.randomColorButton.click();
+        this.randomValueDeterminateButton.click();
     }
 }

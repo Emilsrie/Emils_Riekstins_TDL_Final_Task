@@ -64,8 +64,9 @@ public class FinalTask1 extends TestBase {
             test.log(Status.FAIL, "Home page is NOT visible");
         }
 
-        // Navigating to dialog boxes page
-        homePage.clickDialogBox();
+        hideFooterAd(); // Hiding footer ad
+
+        homePage.clickDialogBox(); // Navigating to dialog boxes page
 
         // Initializing dialog boxes page
         DialogBoxesPage dialogBoxesPage = new DialogBoxesPage(driver);
@@ -74,6 +75,8 @@ public class FinalTask1 extends TestBase {
         } else {
             test.log(Status.FAIL, "Dialog boxes is NOT visible");
         }
+
+        hideFooterAd(); // Hiding footer ad
 
         // Clicking on "Create New User"
         // TODO add try catch for NullPointerException
@@ -86,17 +89,13 @@ public class FinalTask1 extends TestBase {
             test.log(Status.FAIL, "Form frame is NOT visible");
         }
 
-        // Waiting for form to open for screenshot
-        waitToLoad();
+        waitToLoad(); // Waiting for form to open for screenshot
         // Creating a screenshot
-        String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BASE64);
-        test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
+        createScreenshot(test); // Creating a screenshot
 
-        // Entering my own information and take screenshot
-        formFrame.signUp();
-        waitToLoad();
-        String base64Screenshot2 = "data:image/png;base64," + ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BASE64);
-        test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot2).build());
+        formFrame.signUp(); // Entering my own information
+        waitToLoad(); // Waiting for form to open for screenshot
+        createScreenshot(test); // Creating a screenshot
 
         // Creating new user with entered information
         formFrame.clickCreateAnAccountButton();
@@ -124,10 +123,7 @@ public class FinalTask1 extends TestBase {
             test.log(Status.FAIL, "Home page is NOT visible");
         }
 
-        // Hiding footer ad
-        JavascriptExecutor jsExecutor = (JavascriptExecutor)getDriver();
-        WebElement advertisementBlock = getWebElement("css=ins[data-adsbygoogle-status='done'][data-anchor-status='displayed']");
-        jsExecutor.executeScript("arguments[0].style.bottom = '-350px';", advertisementBlock);
+        hideFooterAd(); // Hiding footer ad
 
         // Clicking on tabs button
         homePage.clickTabsButton();
@@ -140,6 +136,8 @@ public class FinalTask1 extends TestBase {
             test.log(Status.FAIL, "Tabs page is NOT visible");
         }
 
+        hideFooterAd(); // Hiding footer ad
+
         // Hiding popup ads
 //        WebElement popupAds = getWebElement("css=ins[data-adsbygoogle-status='done'][data-anchor-status='displayed']");
 //        jsExecutor.executeScript("arguments[0].style.display = 'none';", popupAds);
@@ -151,11 +149,9 @@ public class FinalTask1 extends TestBase {
         SimpleAccordeonFrame simpleAccordeonFrame = new SimpleAccordeonFrame(driver);
         simpleAccordeonFrame.clickSection2Button();
 
-        // Wait for dropdown to finish opening for the screenshot
-        waitToLoad();
-        // Creating a screenshot
-        String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BASE64);
-        test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
+
+        waitToLoad(); // Wait for dropdown to finish opening for the screenshot
+        createScreenshot(test); // Creating a screenshot
 
         this.driver = switchToDefault();
     }
@@ -175,14 +171,19 @@ public class FinalTask1 extends TestBase {
             test.log(Status.FAIL, "Home page is NOT visible");
         }
 
-        homePage.clickProgressBarButton();
+        hideFooterAd(); // Hiding footer ad
+
+        homePage.clickProgressBarButton(); // Navigating to progress bar tab
 
         ProgressBarPage progressBarPage = new ProgressBarPage(driver);
         progressBarPage.clickRandomProgressBarButton();
 
+        hideFooterAd(); // Hiding footer ad
+
         this.driver = switchToIframe("xpath=//div[2]/p/iframe");
         RandomProgressBarFrame randomProgressBarFrame = new RandomProgressBarFrame(driver);
         randomProgressBarFrame.clickRandomColorButton();
+        randomProgressBarFrame.clickRandomValueDeterminateButton();
 
         this.driver = switchToDefault();
     }
@@ -202,8 +203,9 @@ public class FinalTask1 extends TestBase {
             test.log(Status.FAIL, "Home page is NOT visible");
         }
 
-        // Navigating to dialog boxes page
-        homePage.clickDialogBox();
+        hideFooterAd(); // Hiding footer ad
+
+        homePage.clickDialogBox(); // Navigating to dialog boxes page
 
         // Initializing dialog boxes page
         DialogBoxesPage dialogBoxesPage = new DialogBoxesPage(driver);
@@ -212,6 +214,8 @@ public class FinalTask1 extends TestBase {
         } else {
             test.log(Status.FAIL, "Dialog boxes is NOT visible");
         }
+
+        hideFooterAd(); // Hiding footer ad
 
         // Clicking on messagebox tab
         dialogBoxesPage.clickMessageBoxButton();
@@ -256,6 +260,8 @@ public class FinalTask1 extends TestBase {
 
         openUrl2();
 
+
+
         // Initializing homepage
         AutoCompletePage autoCompletePage = new AutoCompletePage(driver);
         if (autoCompletePage.isInitialized()) {
@@ -263,6 +269,9 @@ public class FinalTask1 extends TestBase {
         } else {
             test.log(Status.FAIL, "Auto complete page is NOT visible");
         }
+
+        // Hiding footer ad
+        hideFooterAd();
 
         this.driver = switchToIframe("xpath=//div[1]/p/iframe");
         CategoriesFrame categoriesFrame = new CategoriesFrame(driver);
@@ -276,10 +285,10 @@ public class FinalTask1 extends TestBase {
         this.driver = switchToDefault();
     }
 
-//    @AfterMethod
-//    public void endTask() {
-//       closeDriver();
-//    }
+    @AfterMethod
+    public void endTask() {
+       closeDriver();
+    }
 
     @AfterClass
     public static void endTest() {

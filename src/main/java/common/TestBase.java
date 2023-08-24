@@ -1,5 +1,7 @@
 package common;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -88,5 +90,16 @@ public class TestBase {
             Thread.currentThread().interrupt();
             System.err.println("Thread Interrupted");
         }
+    }
+
+    public void hideFooterAd() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor)getDriver();
+        WebElement advertisementBlock = getWebElement("css=ins[data-adsbygoogle-status='done'][data-anchor-status='displayed']");
+        jsExecutor.executeScript("arguments[0].style.bottom = '-350px';", advertisementBlock);
+    }
+
+    public void createScreenshot(ExtentTest test) {
+        String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BASE64);
+        test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
     }
 }
