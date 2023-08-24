@@ -16,6 +16,11 @@ public class Button extends BasePageObject {
         System.out.println("Button '" + getName() + "' was clicked!");
     }
 
+    public boolean isVisible() {
+        WebElement button = getWebElement(getLocator());
+        return button.isDisplayed();
+    }
+
     public void scrollElementIntoView() {
         WebElement button = getWebElement(getLocator());
         if (!button.isDisplayed()) {

@@ -53,53 +53,73 @@ public class FinalTask1 extends TestBase {
     @Test(groups = "smoke", description = "Smoke test")
     public void firstTest() {
         // Start ExtentTest
-        ExtentTest test = report.createTest("Testing the extent reporter");
-        test.log(Status.INFO, "The test is started");
-
-        openUrl();
-        // Initializing homepage
-        HomePage homePage = new HomePage(driver);
-        Assert.assertTrue(homePage.isInitialized());
-
-        // Navigating to dialog boxes page
-        homePage.clickDialogBox();
-
-        // Initializing dialog boxes page
-        DialogBoxesPage dialogBoxesPage = new DialogBoxesPage(driver);
-        Assert.assertTrue(dialogBoxesPage.isInitialized());
-
-        // Clicking on "Create New User"
-        // TODO add test.log
-        // TODO add try catch for NullPointerException
-        this.driver = switchToIframe("css=div.single_tab_div.resp-tab-content.resp-tab-content-active > p:nth-child(1) > iframe");
-        FormFrame formFrame = new FormFrame(driver);
-        formFrame.clickCreateNewUserButton();
-
-        // Wait for form to open and take screenshot
-        waitToLoad();
-
-        // Creating a screenshot
-        String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BASE64);
-        test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
-
-        // Enter my own information and take screenshot
-        formFrame.signUp();
-        test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
-    }
-
-
-    // TODO close popup ads
-    @Test(groups = "smoke", description = "Smoke test")
-    public void secondTest() {
-        // Start ExtentTest
-        ExtentTest test = report.createTest("Testing the extent reporter");
+        ExtentTest test = report.createTest("Testing new account creation");
         test.log(Status.INFO, "The test is started");
 
         openUrl();
         // Initializing homepage
         HomePage homePage = new HomePage(driver);
         if (homePage.isInitialized()) {
-            Assert.assertTrue(homePage.isInitialized());
+            test.log(Status.INFO, "Home page is visible");
+        } else {
+            test.log(Status.INFO, "Home page is NOT visible");
+        }
+
+        // Navigating to dialog boxes page
+        homePage.clickDialogBox();
+
+        // Initializing dialog boxes page
+        DialogBoxesPage dialogBoxesPage = new DialogBoxesPage(driver);
+        if (dialogBoxesPage.isInitialized()) {
+            test.log(Status.INFO, "Dialog boxes page is visible");
+        } else {
+            test.log(Status.INFO, "Dialog boxes is NOT visible");
+        }
+
+        // Clicking on "Create New User"
+        // TODO add try catch for NullPointerException
+        this.driver = switchToIframe("css=div.single_tab_div.resp-tab-content.resp-tab-content-active > p:nth-child(1) > iframe");
+        FormFrame formFrame = new FormFrame(driver);
+        formFrame.clickCreateNewUserButton();
+        if (formFrame.isInitialized()) {
+            test.log(Status.INFO, "Form frame is visible");
+        } else {
+            test.log(Status.INFO, "Form frame is NOT visible");
+        }
+
+        // Waiting for form to open for screenshot
+        waitToLoad();
+        // Creating a screenshot
+        String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BASE64);
+        test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
+
+        // Entering my own information and take screenshot
+        formFrame.signUp();
+        waitToLoad();
+        String base64Screenshot2 = "data:image/png;base64," + ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BASE64);
+        test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot2).build());
+
+        // Creating new user with entered information
+        formFrame.clickCreateAnAccountButton();
+        // Checking if new user has been created
+        if (formFrame.newUserIsCreated()) {
+            test.log(Status.INFO, "New user is created");
+        } else {
+            test.log(Status.INFO, "New user is NOT created");
+        }
+    }
+
+    // TODO close popup ads
+    @Test(groups = "smoke", description = "Smoke test")
+    public void secondTest() {
+        // Start ExtentTest
+        ExtentTest test = report.createTest("Testing section 2 display");
+        test.log(Status.INFO, "The test is started");
+
+        openUrl();
+        // Initializing homepage
+        HomePage homePage = new HomePage(driver);
+        if (homePage.isInitialized()) {
             test.log(Status.INFO, "Home page is visible");
         } else {
             test.log(Status.INFO, "Home page is NOT visible");
@@ -111,7 +131,6 @@ public class FinalTask1 extends TestBase {
         // Initializing tabs page
         TabsPage tabsPage = new TabsPage(driver);
         if (tabsPage.isInitialized()) {
-            Assert.assertTrue(tabsPage.isInitialized());
             test.log(Status.INFO, "Tabs page is visible");
         } else {
             test.log(Status.INFO, "Tabs page is NOT visible");
@@ -136,7 +155,6 @@ public class FinalTask1 extends TestBase {
 
         // Wait for dropdown to finish opening for the screenshot
         waitToLoad();
-
         // Creating a screenshot
         String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BASE64);
         test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());

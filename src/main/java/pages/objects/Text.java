@@ -12,4 +12,9 @@ public class Text extends BasePageObject {
         WebElement content = getWebElement(getLocator());
         return content.getText();
     }
+
+    public boolean isVisible() {
+        WebElement text = getWebElement(getLocator());
+        return text.isDisplayed();
+    }
 }
