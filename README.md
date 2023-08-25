@@ -23,9 +23,10 @@ Assuming that all tests are located in src/test/java/ folder it will run all tes
 
 * How to exclude tests from running
 1) Using Surefire Plugin Excludes. It is used in Maven for running tests and can be configured to exclude certain test classes or methods using '-Dtest' <br>
-For example: mvn test -Dtest=!com.example.ExcludedTest <br>
+For example: <br>
+_mvn test -Dtest=!com.example.ExcludedTest_ <br>
 
-2) Using Surefire Plugin Excludes in pom. As the previous example Surefire can be used to do exclusions directly in the project's 'pom.xml' file by specifying the excluded classes within the configuration <br>
+3) Using Surefire Plugin Excludes in pom. As the previous example Surefire can be used to do exclusions directly in the project's 'pom.xml' file by specifying the excluded classes within the configuration <br>
 For example:
 ```
 <build>
