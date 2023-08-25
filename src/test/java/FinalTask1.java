@@ -274,7 +274,7 @@ public class FinalTask1 extends TestBase {
         // 2. writing "and" in search field
         categoriesFrame.inputInSearchField();
 
-        // 3. selecting "Anders Andersson" value
+        // 3. selecting "anders andersson" value
         categoriesFrame.clickAndersAnderssonButton();
 
         // 4. Creating a screenshot
